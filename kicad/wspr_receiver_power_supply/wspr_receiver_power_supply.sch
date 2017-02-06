@@ -1,0 +1,409 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:references
+LIBS:ti_parts
+LIBS:wspr_receiver_power_supply-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L TL431DBZ D1
+U 1 1 5898AECC
+P 1950 3000
+F 0 "D1" H 1850 3100 50  0000 C CNN
+F 1 "LM4041" H 1950 2900 50  0000 C CNN
+F 2 "SOT-23" H 1950 2850 50  0001 C CIN
+F 3 "" H 1950 3000 50  0000 C CNN
+	1    1950 3000
+	0    1    -1   0   
+$EndComp
+$Comp
+L CONN_01X02 P1
+U 1 1 5898AF09
+P 750 2150
+F 0 "P1" H 750 2300 50  0000 C CNN
+F 1 "IN 12-14v" V 850 2150 50  0000 C CNN
+F 2 "" H 750 2150 50  0000 C CNN
+F 3 "" H 750 2150 50  0000 C CNN
+	1    750  2150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 P2
+U 1 1 5898AF44
+P 5500 3050
+F 0 "P2" H 5500 3200 50  0000 C CNN
+F 1 "OUT" V 5600 3050 50  0000 C CNN
+F 2 "" H 5500 3050 50  0000 C CNN
+F 3 "" H 5500 3050 50  0000 C CNN
+	1    5500 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L TLC272 U1
+U 2 1 5898B640
+P 3250 1500
+F 0 "U1" H 2950 1950 60  0000 C CNN
+F 1 "TLC272" H 3150 1500 60  0000 C CNN
+F 2 "" H 3250 1500 60  0000 C CNN
+F 3 "" H 3250 1500 60  0000 C CNN
+	2    3250 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L TLC272 U1
+U 1 1 5898B66F
+P 2000 1550
+F 0 "U1" H 1700 2000 60  0000 C CNN
+F 1 "TLC272" H 1900 1550 60  0000 C CNN
+F 2 "" H 2000 1550 60  0000 C CNN
+F 3 "" H 2000 1550 60  0000 C CNN
+	1    2000 1550
+	1    0    0    1   
+$EndComp
+$Comp
+L TLC272 U1
+U 3 1 5898B6E8
+P 3700 2700
+F 0 "U1" H 3400 3150 60  0000 C CNN
+F 1 "TLC272" H 3600 2700 60  0000 C CNN
+F 2 "" H 3700 2700 60  0000 C CNN
+F 3 "" H 3700 2700 60  0000 C CNN
+	3    3700 2700
+	1    0    0    1   
+$EndComp
+$Comp
+L IRF9540N Q1
+U 1 1 5898B7B9
+P 4450 2750
+F 0 "Q1" H 4700 2825 50  0000 L CNN
+F 1 "IRFL9014" H 4700 2750 50  0000 L CNN
+F 2 "SOT-223" H 4700 2675 50  0001 L CIN
+F 3 "" H 4450 2750 50  0000 L CNN
+	1    4450 2750
+	1    0    0    1   
+$EndComp
+$Comp
+L R R1
+U 1 1 5898B9E2
+P 1950 2400
+F 0 "R1" V 2030 2400 50  0000 C CNN
+F 1 "7.5k" V 1950 2400 50  0000 C CNN
+F 2 "" V 1880 2400 50  0000 C CNN
+F 3 "" H 1950 2400 50  0000 C CNN
+	1    1950 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R2
+U 1 1 5898BA49
+P 2250 2800
+F 0 "R2" V 2330 2800 50  0000 C CNN
+F 1 "4.7k" V 2250 2800 50  0000 C CNN
+F 2 "" V 2180 2800 50  0000 C CNN
+F 3 "" H 2250 2800 50  0000 C CNN
+	1    2250 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R3
+U 1 1 5898BA7C
+P 2250 3200
+F 0 "R3" V 2330 3200 50  0000 C CNN
+F 1 "3k" V 2250 3200 50  0000 C CNN
+F 2 "" V 2180 3200 50  0000 C CNN
+F 3 "" H 2250 3200 50  0000 C CNN
+	1    2250 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	950  2100 4550 2100
+Wire Wire Line
+	1950 2550 1950 2900
+Wire Wire Line
+	2250 2650 2250 2600
+Wire Wire Line
+	1950 2600 2350 2600
+Connection ~ 1950 2600
+Wire Wire Line
+	2050 3000 2250 3000
+Wire Wire Line
+	2250 2950 2250 3050
+Connection ~ 2250 3000
+Wire Wire Line
+	1950 1950 1950 2250
+Wire Wire Line
+	950  2200 1000 2200
+Wire Wire Line
+	1000 2200 1000 3400
+Wire Wire Line
+	1000 3400 2950 3400
+Wire Wire Line
+	2250 3400 2250 3350
+Wire Wire Line
+	1950 3100 1950 3450
+Connection ~ 1950 3400
+$Comp
+L C C1
+U 1 1 5898BCC5
+P 1150 2300
+F 0 "C1" H 1175 2400 50  0000 L CNN
+F 1 "100n" H 1175 2200 50  0000 L CNN
+F 2 "" H 1188 2150 50  0000 C CNN
+F 3 "" H 1150 2300 50  0000 C CNN
+	1    1150 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP C2
+U 1 1 5898BCF2
+P 1400 2300
+F 0 "C2" H 1425 2400 50  0000 L CNN
+F 1 "10u" H 1425 2200 50  0000 L CNN
+F 2 "" H 1438 2150 50  0000 C CNN
+F 3 "" H 1400 2300 50  0000 C CNN
+	1    1400 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1400 2450 1400 2500
+Wire Wire Line
+	1400 2500 1000 2500
+Connection ~ 1000 2500
+Wire Wire Line
+	1150 2450 1150 2500
+Connection ~ 1150 2500
+Wire Wire Line
+	1150 2150 1150 2100
+Connection ~ 1150 2100
+Wire Wire Line
+	1400 2150 1400 2100
+Connection ~ 1400 2100
+$Comp
+L R R4
+U 1 1 5898BF25
+P 2500 2600
+F 0 "R4" V 2580 2600 50  0000 C CNN
+F 1 "10k" V 2500 2600 50  0000 C CNN
+F 2 "" V 2430 2600 50  0000 C CNN
+F 3 "" H 2500 2600 50  0000 C CNN
+	1    2500 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L C C3
+U 1 1 5898BFF6
+P 2700 2800
+F 0 "C3" H 2725 2900 50  0000 L CNN
+F 1 "100n" H 2725 2700 50  0000 L CNN
+F 2 "" H 2738 2650 50  0000 C CNN
+F 3 "" H 2700 2800 50  0000 C CNN
+	1    2700 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP C4
+U 1 1 5898C05E
+P 2950 2800
+F 0 "C4" H 2975 2900 50  0000 L CNN
+F 1 "10u" H 2975 2700 50  0000 L CNN
+F 2 "" H 2988 2650 50  0000 C CNN
+F 3 "" H 2950 2800 50  0000 C CNN
+	1    2950 2800
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 2600
+Wire Wire Line
+	2650 2600 3250 2600
+Wire Wire Line
+	2700 2600 2700 2650
+Wire Wire Line
+	2950 2600 2950 2650
+Connection ~ 2700 2600
+Wire Wire Line
+	2950 2950 2950 3800
+Connection ~ 2250 3400
+Wire Wire Line
+	2700 2950 2700 3400
+Connection ~ 2700 3400
+Connection ~ 2950 2600
+$Comp
+L R R6
+U 1 1 5898C307
+P 4550 3200
+F 0 "R6" V 4630 3200 50  0000 C CNN
+F 1 "15k" V 4550 3200 50  0000 C CNN
+F 2 "" V 4480 3200 50  0000 C CNN
+F 3 "" H 4550 3200 50  0000 C CNN
+	1    4550 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R7
+U 1 1 5898C348
+P 4550 3600
+F 0 "R7" V 4630 3600 50  0000 C CNN
+F 1 "?" V 4550 3600 50  0000 C CNN
+F 2 "" V 4480 3600 50  0000 C CNN
+F 3 "" H 4550 3600 50  0000 C CNN
+	1    4550 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R5
+U 1 1 5898C404
+P 4200 2400
+F 0 "R5" V 4280 2400 50  0000 C CNN
+F 1 "100k" V 4200 2400 50  0000 C CNN
+F 2 "" V 4130 2400 50  0000 C CNN
+F 3 "" H 4200 2400 50  0000 C CNN
+	1    4200 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4550 2100 4550 2550
+Connection ~ 1950 2100
+Wire Wire Line
+	4200 2250 4200 2100
+Connection ~ 4200 2100
+Wire Wire Line
+	4200 2550 4200 2700
+Wire Wire Line
+	4150 2700 4250 2700
+Connection ~ 4200 2700
+Wire Wire Line
+	4550 2950 4550 3050
+Wire Wire Line
+	4550 3350 4550 3450
+Wire Wire Line
+	4550 3750 4550 3800
+Wire Wire Line
+	2950 3800 5250 3800
+Connection ~ 2950 3400
+Wire Wire Line
+	3250 2850 3200 2850
+Wire Wire Line
+	3200 2850 3200 3400
+Wire Wire Line
+	3200 3400 4550 3400
+Connection ~ 4550 3400
+$Comp
+L GND #PWR1
+U 1 1 5898C899
+P 1950 3450
+F 0 "#PWR1" H 1950 3200 50  0001 C CNN
+F 1 "GND" H 1950 3300 50  0000 C CNN
+F 2 "" H 1950 3450 50  0000 C CNN
+F 3 "" H 1950 3450 50  0000 C CNN
+	1    1950 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR2
+U 1 1 5898C8D1
+P 2350 1200
+F 0 "#PWR2" H 2350 950 50  0001 C CNN
+F 1 "GND" H 2350 1050 50  0000 C CNN
+F 2 "" H 2350 1200 50  0000 C CNN
+F 3 "" H 2350 1200 50  0000 C CNN
+	1    2350 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1950 1200 1950 1150
+Wire Wire Line
+	1950 1150 2750 1150
+Wire Wire Line
+	2350 1150 2350 1200
+Wire Wire Line
+	2800 1600 2750 1600
+Wire Wire Line
+	2750 1600 2750 1150
+Connection ~ 2350 1150
+Wire Wire Line
+	2800 1350 2750 1350
+Connection ~ 2750 1350
+$Comp
+L C C5
+U 1 1 5898CB10
+P 4750 3400
+F 0 "C5" H 4775 3500 50  0000 L CNN
+F 1 "100n" H 4775 3300 50  0000 L CNN
+F 2 "" H 4788 3250 50  0000 C CNN
+F 3 "" H 4750 3400 50  0000 C CNN
+	1    4750 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP C6
+U 1 1 5898CB8F
+P 5000 3400
+F 0 "C6" H 5025 3500 50  0000 L CNN
+F 1 "10u" H 5025 3300 50  0000 L CNN
+F 2 "" H 5038 3250 50  0000 C CNN
+F 3 "" H 5000 3400 50  0000 C CNN
+	1    5000 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4550 3000 5300 3000
+Connection ~ 4550 3000
+Wire Wire Line
+	4750 3250 4750 3000
+Connection ~ 4750 3000
+Wire Wire Line
+	5000 3000 5000 3250
+Wire Wire Line
+	4750 3800 4750 3550
+Connection ~ 4550 3800
+Wire Wire Line
+	5000 3800 5000 3550
+Connection ~ 4750 3800
+Wire Wire Line
+	5250 3800 5250 3100
+Wire Wire Line
+	5250 3100 5300 3100
+Connection ~ 5000 3800
+Connection ~ 5000 3000
+Text Notes 4100 4050 0    60   ~ 0
+R7=4.3k for 9v output\nR7=3.3k for 11v output
+$EndSCHEMATC
