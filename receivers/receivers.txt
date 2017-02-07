@@ -1,3 +1,8 @@
 All receivers are without local oscillators. SI5351 is used instead of local oscillators.
 7, 10 MHz - RX204080EMF http://us5msq.com.ua/prostye-supergeterodinnye-priemniki-na-dvuxzatvornyx-polevyx-tranzistorax-chast-2/
 3.5 MHz - RX80RFTEMF http://us5msq.com.ua/priyomnik-korotkovolnovika-s-nizkochastotnym-emf-chast-3/
+
+Filters:
+
+7, 10 MHz - 500 kHz electromechanical filters, bandwidth 500 Hz
+3.5 MHz -215 kHz electromechanical filters, bandwidth 300 Hz
