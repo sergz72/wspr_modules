@@ -1,0 +1,3 @@
+All receivers are without local oscillators. SI5351 is used instead of local oscillators.
+7, 10 MHz - RX204080EMF http://us5msq.com.ua/prostye-supergeterodinnye-priemniki-na-dvuxzatvornyx-polevyx-tranzistorax-chast-2/
+3.5 MHz - RX80RFTEMF http://us5msq.com.ua/priyomnik-korotkovolnovika-s-nizkochastotnym-emf-chast-3/
