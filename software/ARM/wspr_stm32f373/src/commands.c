@@ -89,9 +89,9 @@ void run_command(void)
 				switch (command.c.control.value)
 				{
 					case 2: drive = SI5351_DRIVE_2MA; break;
-					case 4: drive = SI5351_DRIVE_2MA; break;
-					case 6: drive = SI5351_DRIVE_2MA; break;
-					case 8: drive = SI5351_DRIVE_2MA; break;
+					case 4: drive = SI5351_DRIVE_4MA; break;
+					case 6: drive = SI5351_DRIVE_6MA; break;
+					case 8: drive = SI5351_DRIVE_8MA; break;
 					default:
             serial_send('e');
 					  return;

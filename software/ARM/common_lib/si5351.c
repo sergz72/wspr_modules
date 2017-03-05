@@ -190,6 +190,15 @@ struct Si5351IntStatus
 	uint8_t LOS_STKY;
 };
 
+struct Si5351Settings
+{
+  int32_t ref_correction;
+  uint32_t plla_freq;
+  uint32_t pllb_freq;
+	unsigned char output_enable_control;
+	unsigned char clk_control[8];
+};
+
 /* Suggested private function prototypes */
 
 void rational_best_approximation(
@@ -203,12 +212,10 @@ int si5351_update_sys_status(int channel, struct Si5351Status *);
 int si5351_update_int_status(int channel, struct Si5351IntStatus *);
 int si5351_set_ms_source(int channel, enum si5351_clock, enum si5351_pll);
 				
-int32_t ref_correction[SI5351_CHANNELS];
-uint32_t plla_freq[SI5351_CHANNELS];
-uint32_t pllb_freq[SI5351_CHANNELS];
+static struct Si5351Settings settings[SI5351_CHANNELS];
 
-struct Si5351Status dev_status;
-struct Si5351IntStatus dev_int_status;
+static struct Si5351Status dev_status;
+static struct Si5351IntStatus dev_int_status;
 
 /******************************/
 /* Suggested public functions */
@@ -222,13 +229,16 @@ struct Si5351IntStatus dev_int_status;
  */
 void si5351_init(void)
 {
-	int i;
+	int i, j;
 	
 	for (i = 0; i < SI5351_CHANNELS; i++)
 	{
 		/* Store the correction factor */
-		ref_correction[i] = 0;
-		plla_freq[i] = pllb_freq[i] = 0;
+		settings[i].ref_correction = 0;
+		settings[i].plla_freq = settings[i].pllb_freq = 0;
+		settings[i].output_enable_control = 0;
+		for (j = 0; j < 8; j++)
+		  settings[i].clk_control[j] = 0x0C;
 	}
 }
 
@@ -286,25 +296,25 @@ int si5351_set_freq(int channel, uint32_t freq, int pll_freq, enum si5351_clock 
 	if(clk == SI5351_CLK0)
 	{
 		target_pll = SI5351_PLLA;
-		plla_freq[channel] = pll_freq;
+		settings[channel].plla_freq = pll_freq;
 	}
 	else if(clk == SI5351_CLK1)
 	{
 		target_pll = SI5351_PLLB;
-		pllb_freq[channel] = pll_freq;
+		settings[channel].pllb_freq = pll_freq;
 	}
 	else
 	{
 		/* need to account for CLK2 set before CLK1 */
-		if(pllb_freq[channel] == 0)
+		if(settings[channel].pllb_freq == 0)
 		{
 			target_pll = SI5351_PLLB;
-			pllb_freq[channel] = pll_freq;
+			settings[channel].pllb_freq = pll_freq;
 		}
 		else
 		{
 			target_pll = SI5351_PLLB;
-			pll_freq = pllb_freq[channel];
+			pll_freq = settings[channel].pllb_freq;
 			multisynth_recalc(freq, pll_freq, &ms_reg);
 		}
 	}
@@ -312,7 +322,7 @@ int si5351_set_freq(int channel, uint32_t freq, int pll_freq, enum si5351_clock 
 	/* PLL parameters first */
 	if (calc_pll)
 	{
-  	pll_calc(pll_freq, &pll_reg, ref_correction[channel]);
+  	pll_calc(pll_freq, &pll_reg, settings[channel].ref_correction);
 
   	i = 0;
 
@@ -447,7 +457,7 @@ int si5351_set_pll(int channel, uint32_t pll_freq, enum si5351_pll target_pll)
 	uint32_t i;
 	uint8_t temp;
 	
-	pll_calc(pll_freq, &pll_reg, ref_correction[channel]);
+	pll_calc(pll_freq, &pll_reg, settings[channel].ref_correction);
 
 	/* Derive the register values to write */
 
@@ -506,23 +516,12 @@ int si5351_set_pll(int channel, uint32_t pll_freq, enum si5351_pll target_pll)
  */
 int si5351_clock_enable(int channel, enum si5351_clock clk, uint8_t enable)
 {
-	uint8_t reg_val;
-
-	if(si5351_read(channel, SI5351_OUTPUT_ENABLE_CTRL, &reg_val) != 0)
-	{
-		return 1;
-	}
-
 	if(enable)
-	{
-		reg_val &= ~(1<<(uint8_t)clk);
-	}
+		settings[channel].output_enable_control &= ~(1<<(uint8_t)clk);
 	else
-	{
-		reg_val |= (1<<(uint8_t)clk);
-	}
+		settings[channel].output_enable_control |= (1<<(uint8_t)clk);
 
-	return si5351_write(channel, SI5351_OUTPUT_ENABLE_CTRL, reg_val);
+	return si5351_write(channel, SI5351_OUTPUT_ENABLE_CTRL, settings[channel].output_enable_control);
 }
 
 /*
@@ -537,37 +536,30 @@ int si5351_clock_enable(int channel, enum si5351_clock clk, uint8_t enable)
  */
 int si5351_drive_strength(int channel, enum si5351_clock clk, enum si5351_drive drive)
 {
-	uint8_t reg_val;
 	const uint8_t mask = 0x03;
-
-	if(si5351_read(channel, SI5351_CLK0_CTRL + (uint8_t)clk, &reg_val) != 0)
-	{
-		return 1;
-	}
 
 	switch(drive)
 	{
 		case SI5351_DRIVE_2MA:
-			reg_val &= ~(mask);
-			reg_val |= 0x00;
+			settings[channel].clk_control[clk] &= ~(mask);
 			break;
 		case SI5351_DRIVE_4MA:
-			reg_val &= ~(mask);
-			reg_val |= 0x01;
+			settings[channel].clk_control[clk] &= ~(mask);
+			settings[channel].clk_control[clk] |= 0x01;
 			break;
 		case SI5351_DRIVE_6MA:
-			reg_val &= ~(mask);
-			reg_val |= 0x02;
+			settings[channel].clk_control[clk] &= ~(mask);
+			settings[channel].clk_control[clk] |= 0x02;
 			break;
 		case SI5351_DRIVE_8MA:
-			reg_val &= ~(mask);
-			reg_val |= 0x03;
+			settings[channel].clk_control[clk] &= ~(mask);
+			settings[channel].clk_control[clk] |= 0x03;
 			break;
 		default:
-			break;
+			return 1;
 	}
 
-	return si5351_write(channel, SI5351_CLK0_CTRL + (uint8_t)clk, reg_val);
+	return si5351_write(channel, SI5351_CLK0_CTRL + (uint8_t)clk, settings[channel].clk_control[clk]);
 }
 
 /*
@@ -613,7 +605,7 @@ int si5351_update_status(int channel)
  */
 void si5351_set_correction(int channel, int32_t corr)
 {
-	ref_correction[channel] = corr;
+	settings[channel].ref_correction = corr;
 }
 
 /*******************************/
@@ -891,21 +883,13 @@ int si5351_update_int_status(int channel, struct Si5351IntStatus *int_status)
 
 int si5351_set_ms_source(int channel, enum si5351_clock clk, enum si5351_pll pll)
 {
-	uint8_t reg_val = 0x0c;
-	uint8_t reg_val2;
-
-	if(si5351_read(channel, SI5351_CLK0_CTRL + (uint8_t)clk, &reg_val2) != 0)
+	if (pll == SI5351_PLLA)
 	{
-		return 1;
+		settings[channel].clk_control[clk] &= ~(SI5351_CLK_PLL_SELECT);
 	}
-
-	if(pll == SI5351_PLLA)
+	else if (pll == SI5351_PLLB)
 	{
-		reg_val &= ~(SI5351_CLK_PLL_SELECT);
+		settings[channel].clk_control[clk] |= SI5351_CLK_PLL_SELECT;
 	}
-	else if(pll == SI5351_PLLB)
-	{
-		reg_val |= SI5351_CLK_PLL_SELECT;
-	}
-	return si5351_write(channel, SI5351_CLK0_CTRL + (uint8_t)clk, reg_val);
+	return si5351_write(channel, SI5351_CLK0_CTRL + (uint8_t)clk, settings[channel].clk_control[clk]);
 }
