@@ -4,5 +4,6 @@ All receivers are without local oscillators. SI5351 is used instead of local osc
 
 Filters:
 
-7, 10 MHz - 500 kHz electromechanical filters, bandwidth 500 Hz
-3.5 MHz - 215 kHz electromechanical filter, bandwidth 300 Hz
+1.8, 3.5 MHz - 215 kHz electromechanical filter, bandwidth 300 Hz
+7, 10, 14 MHz - 500 kHz electromechanical filters, bandwidth 500 Hz
+18, 50 MHz - 5.0 MHz quartz filter.
