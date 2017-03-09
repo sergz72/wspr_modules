@@ -441,17 +441,6 @@ F 3 "" H 3650 1550 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L D_Bridge_+-AA D3
-U 1 1 58B07DBF
-P 7350 4000
-F 0 "D3" H 7400 4275 50  0000 L CNN
-F 1 "D_Bridge_+-AA" H 7400 4200 50  0001 L CNN
-F 2 "" H 7350 4000 50  0000 C CNN
-F 3 "" H 7350 4000 50  0000 C CNN
-	1    7350 4000
-	-1   0    0    -1  
-$EndComp
-$Comp
 L Transformer_1P_SS T4
 U 1 1 58B08294
 P 7350 4900
@@ -619,7 +608,7 @@ F 3 "" H 3000 2050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Text Notes 700  5600 0    60   ~ 0
-D1, D2, D3 - 4xHSMS-2822
+D1, D2 - 2xHSMS-2822\nD3, D6 - HSMS-2822
 Text Notes 4600 3150 0    60   ~ 0
 300 HZ filter
 Text Notes 700  5950 0    60   ~ 0
@@ -1052,26 +1041,18 @@ Wire Wire Line
 Wire Wire Line
 	7450 3500 7450 3450
 Wire Wire Line
-	7350 3700 7750 3700
-Wire Wire Line
-	7750 3700 7750 3450
-Wire Wire Line
-	6950 3450 6950 4300
+	7750 3450 7750 3800
 Wire Wire Line
 	7350 4500 7350 4350
 Wire Wire Line
 	6650 4350 10750 4350
 Connection ~ 6650 3000
 Wire Wire Line
-	7050 4000 7050 4450
-Wire Wire Line
-	7050 4450 7150 4450
+	7000 4450 7150 4450
 Wire Wire Line
 	7150 4450 7150 4500
 Wire Wire Line
-	7650 4000 7650 4450
-Wire Wire Line
-	7650 4450 7550 4450
+	7550 4450 7700 4450
 Wire Wire Line
 	7550 4450 7550 4500
 Wire Wire Line
@@ -1091,8 +1072,6 @@ Wire Wire Line
 	7850 3500 7850 3550
 Connection ~ 7850 3500
 Connection ~ 7450 3500
-Wire Wire Line
-	6950 4300 7350 4300
 Wire Wire Line
 	7850 4350 7850 3850
 Connection ~ 7350 4350
@@ -1290,4 +1269,46 @@ Wire Wire Line
 	2300 3050 2300 3200
 Wire Wire Line
 	2300 3500 2300 3700
+$Comp
+L D_Schottky_x2_Serial_CAK D3
+U 1 1 58C1ADF8
+P 7350 3600
+F 0 "D3" H 7400 3500 50  0000 C CNN
+F 1 "D_Schottky_x2_Serial_CAK" H 7350 3700 50  0001 C CNN
+F 2 "" H 7350 3600 50  0000 C CNN
+F 3 "" H 7350 3600 50  0000 C CNN
+	1    7350 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L D_Schottky_x2_Serial_CAK D6
+U 1 1 58C1AEA5
+P 7350 4100
+F 0 "D6" H 7400 4000 50  0000 C CNN
+F 1 "D_Schottky_x2_Serial_CAK" H 7350 4200 50  0001 C CNN
+F 2 "" H 7350 4100 50  0000 C CNN
+F 3 "" H 7350 4100 50  0000 C CNN
+	1    7350 4100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7000 4450 7000 3600
+Wire Wire Line
+	7000 3600 7050 3600
+Wire Wire Line
+	7050 4100 7000 4100
+Connection ~ 7000 4100
+Wire Wire Line
+	7700 4450 7700 3600
+Wire Wire Line
+	7700 3600 7650 3600
+Wire Wire Line
+	7650 4100 7700 4100
+Connection ~ 7700 4100
+Wire Wire Line
+	7750 3800 7350 3800
+Wire Wire Line
+	6950 3450 6950 3900
+Wire Wire Line
+	6950 3900 7350 3900
 $EndSCHEMATC
